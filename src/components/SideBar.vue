@@ -52,8 +52,7 @@ export default {
 };
 </script>
 
-.
-<style lang="scss">
+<style lang="scss" scoped>
 * {
     margin: 0;
     padding: 0
@@ -76,7 +75,7 @@ export default {
 }
 .menu {
     background-color: #34495e;
-    height: 100vh;
+    height: 700px;
     width: 250px;
     position: absolute;
     transition: transform .3s ease-in-out;
@@ -121,7 +120,7 @@ export default {
 }
 .content {
     background-color: #2c3e50;
-    height: 100vh;
+    height: 700px;
     width: 100%;
     
 }
