@@ -1,9 +1,9 @@
 <template>
     <div class="todo-list">
-        <h2>
-            To do list
-        </h2>
-        <span>Need to do</span>
+        <h1>
+            Todo List
+            <span>Get things done, one item at a time</span>
+        </h1>
         <transition-group name="flip-list" tag="ul">
             <template v-if="todoOrdered.length > 0">
                 <li v-for="item in todoOrdered" :key="item.id">
@@ -128,6 +128,7 @@ export default {
     margin: 0px;
 }
 
+
 .flip-list-move {
     transition: transform 1.5s ;
 }
@@ -157,6 +158,18 @@ export default {
     width: 500px;
     margin: 10px auto;
     padding: 20px 30px;
+    h1 {
+        font-size: 40px;
+        text-align: left;
+        padding: 20px;
+        span {
+            font-size: 16px;
+            display: block;
+            padding-top: 10px;
+            padding-bottom: 10px;
+            border-bottom: solid 1px;
+        }
+    }
 }
 
 li {
@@ -186,7 +199,25 @@ li {
 }
 
 .item-done {
-    text-decoration: line-through;
+    opacity: 0.6;
+    position: relative;
+    &::before {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left:-.5rem;
+        display: block;
+        width: 0%;
+        height: 1px;
+        border-bottom: solid 1px #fff;
+        animation: donedone 0.3s ease-out 0s forwards;
+    }
+}
+
+@keyframes donedone{
+    to {
+        width: calc(100% + 1rem);
+    }
 }
 
 
