@@ -22,26 +22,33 @@
             <input type="text" name="" ref="todoText">
             <button value="Add" @click="addHandle">Add</button>
             <label class="switch">
-                <input type="checkbox" @change="tongleHandle" v-model="tongleStatus">
+                <input type="checkbox"  v-model="tongleStatus">
                 <span class="slider round"></span>
             </label>
 
         </div>
+        <SwitchButton v-model="isChecked"/>
+
+
     </div>
 
 </template>
 
 <script>
 
-
+import SwitchButton from '../components/commons/SwitchButton.vue';
 
 export default {
     name: 'ToDo',
+    components: {
+        SwitchButton,
+    },
     props: {
 
     },
     data() {
         return {
+            isChecked: false,
             todoList: [
                 {
                     id: 1,
@@ -88,6 +95,9 @@ export default {
             localStorage.setItem('todoList', JSON.stringify(newValue) )
         },
         deep: true
+        },
+        isChecked(newValue) {
+            console.log(newValue)
         }
 
     },
@@ -115,14 +125,11 @@ export default {
             this.todoList.push({ id: id, name: text, isDone: false })
 
         },
-        tongleHandle() {
-
-        },
     }
 }
 
 </script>
-<style lang="scss">
+<style lang="scss" scoped >
 * {
     padding: 0px;
     margin: 0px;
@@ -151,6 +158,7 @@ export default {
 }
 
 .todo-list {
+    box-shadow:-20px -20px 0px 0px rgba(100,100,100,.1);
     color: white;
     background-color: rgba($color: #ff0000, $alpha: 0.6);
     font-family: 'Quicksand', sans-serif;
