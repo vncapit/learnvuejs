@@ -21,15 +21,14 @@
         <div class="add-new">
             <input type="text" name="" ref="todoText">
             <button value="Add" @click="addHandle">Add</button>
-            <label class="switch">
+            <!-- <label class="switch">
                 <input type="checkbox"  v-model="tongleStatus">
                 <span class="slider round"></span>
-            </label>
+            </label> -->
 
+            <!-- <SwitchButton :isCheck="isChecked" @input="isChecked=$event"/> -->
+            <SwitchButton class="switch-button" v-model="isChecked" />
         </div>
-        <SwitchButton v-model="isChecked"/>
-
-
     </div>
 
 </template>
@@ -76,7 +75,7 @@ export default {
     },
     computed: {
         todoOrdered() {
-            if (!this.tongleStatus) {
+            if (!this.isChecked) {
                 return this.todoList;
             }
             else {
@@ -92,19 +91,19 @@ export default {
     watch: {
         todoList: {
             handler(newValue) {
-            localStorage.setItem('todoList', JSON.stringify(newValue) )
-        },
-        deep: true
+                localStorage.setItem('todoList', JSON.stringify(newValue))
+            },
+            deep: true
         },
         isChecked(newValue) {
             console.log(newValue)
         }
 
     },
-    mounted () {
-        if(localStorage.todoList) {
+    mounted() {
+        if (localStorage.todoList) {
             console.log(localStorage.getItem('todoList'))
-            this.todoList = JSON.parse(localStorage.getItem('todoList')) ;
+            this.todoList = JSON.parse(localStorage.getItem('todoList'));
         }
     },
     methods: {
@@ -137,7 +136,7 @@ export default {
 
 
 .flip-list-move {
-    transition: transform 1.5s ;
+    transition: transform 1.5s;
 }
 
 .add-new {
@@ -158,7 +157,7 @@ export default {
 }
 
 .todo-list {
-    box-shadow:-20px -20px 0px 0px rgba(100,100,100,.1);
+    box-shadow: -20px -20px 0px 0px rgba(100, 100, 100, .1);
     color: white;
     background-color: rgba($color: #ff0000, $alpha: 0.6);
     font-family: 'Quicksand', sans-serif;
@@ -166,10 +165,12 @@ export default {
     width: 500px;
     margin: 10px auto;
     padding: 20px 30px;
+
     h1 {
         font-size: 40px;
         text-align: left;
         padding: 20px;
+
         span {
             font-size: 16px;
             display: block;
@@ -209,11 +210,12 @@ li {
 .item-done {
     opacity: 0.6;
     position: relative;
+
     &::before {
         content: '';
         position: absolute;
         top: 50%;
-        left:-.5rem;
+        left: -.5rem;
         display: block;
         width: 0%;
         height: 1px;
@@ -222,12 +224,15 @@ li {
     }
 }
 
-@keyframes donedone{
+@keyframes donedone {
     to {
         width: calc(100% + 1rem);
     }
 }
 
+.switch-button {
+    margin-left: 10px;
+}
 
 
 /* The switch - the box around the slider */
