@@ -1,6 +1,6 @@
 <template>
     <div class="container" ref="container">
-        <div class="menu" @mousemove="mouseMoveHandle" @mouseout="mouseOutHandle" ref="menu" :style="transfrom3d">
+        <div class="menu" @mousemove="mouseMoveHandle" @mouseout="mouseOutHandle" ref="menu" :style="transform3d">
             <div class="background">
 
             </div>
@@ -25,31 +25,27 @@ export default {
                 x: 0,
                 y: 0,
             },
-            transfrom3d: '',
+        }
+    },
+    computed: {
+        transform3d() {
+            let x = (this.coordinates.x * 15 / (500 / 2))
+            let y = (this.coordinates.y * 20 / (400 / 2))
+            return `transform: perspective(800px) rotateX(${y}deg) rotateY(${-x}deg)`
         }
     },
     methods: {
         mouseMoveHandle(e) {
             this.coordinates.x = e.clientX - (this.$refs.menu.getBoundingClientRect().x + this.$refs.menu.clientWidth / 2);
             this.coordinates.y = e.clientY - (this.$refs.menu.getBoundingClientRect().y + this.$refs.menu.clientHeight / 2);
+            console.log(`${this.coordinates.x} , ${this.coordinates.y}`)
 
-            this.transfrom3d = `transform: perspective(800px) rotateX(${this.coordinates.x}deg) rotateY(${this.coordinates.y}deg)`
-            
         },
         mouseOutHandle() {
             this.coordinates.x = 0;
             this.coordinates.y = 0;
         }
-    },
-    watch: {
-        coordinates: {
-            handler(newValue) {
-                console.log(newValue.x)
-                console.log(newValue.y)
-            },
-            deep: true
-        }
-    },
+    }
 }
 </script>
 
@@ -72,14 +68,6 @@ export default {
     width: 500px;
     height: 400px;
     position: relative;
-    transition:
-        transform .4s ease,
-        box-shadow .4s ease;
-}
-
-.transform3d {
-    transform:
-        perspective(800px) rotateX(15deg) rotateY(-20deg)
 }
 
 .background {
@@ -89,6 +77,7 @@ export default {
     background-image: url('../assets/bg1.avif');
     background-repeat: no-repeat;
     background-size: cover;
+    border-radius: 7px;
     opacity: 0.75;
 }
 
@@ -98,6 +87,8 @@ export default {
     left: 0;
     display: block;
     width: 100%;
+    border-top-left-radius: 7px;
+    border-top-right-radius: 7px;
 
     background-color: #071011;
 
