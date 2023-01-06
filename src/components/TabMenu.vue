@@ -31,6 +31,9 @@ export default {
         transform3d() {
             let x = (this.coordinates.x * 15 / (500 / 2))
             let y = (this.coordinates.y * 20 / (400 / 2))
+            if(x == 0 && y == 0) {
+                return `transform: perspective(800px) rotateX(${y}deg) rotateY(${-x}deg); transition: transform 0.3s`
+            }
             return `transform: perspective(800px) rotateX(${y}deg) rotateY(${-x}deg)`
         }
     },
