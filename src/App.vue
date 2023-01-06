@@ -3,6 +3,7 @@
     <ToDo/>
     <SideBar/>
     <TabMenu/>
+    <WeatherApiVue/>
   </div>
 </template>
 
@@ -10,12 +11,14 @@
 import ToDo from './components/ToDo.vue'
 import SideBar from './components/SideBar.vue'
 import TabMenu from './components/TabMenu.vue'
+import WeatherApiVue from './components/WeatherApi.vue'
 export default {
   name: 'App',
   components: {
     ToDo,
     SideBar,
-    TabMenu
+    TabMenu,
+    WeatherApiVue,
 
   }
 }
