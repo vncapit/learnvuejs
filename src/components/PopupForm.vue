@@ -26,8 +26,9 @@
                 <div class="feature">
                     <label>Is Featured
                         <input type="checkbox">
+                        <span></span>
                     </label>
-                    <span>If Is Featured is selected the product will appear in a large card.</span>
+                    <span><i>If Is Featured is selected the product will appear in a large card.</i></span>
                 </div>
                 <div class="desc">
                     <label>Product Description</label>
@@ -64,6 +65,12 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 .container {
     background-image: linear-gradient(-128deg, rgba(255, 181, 32, 0.93) 3%, rgba(239, 39, 153, 0.93) 88%, rgba(237, 18, 171, 0.93) 100%);
     width: 100%;
@@ -99,36 +106,80 @@ label {
     display: block;
     text-align: left;
     max-width: 120px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    padding: 4px 0;
 }
 
 input[type=text] {
     display: block;
     text-align: left;
     width: 100%;
+    padding: 5px;
+    border: 1px solid #ECECEC;
+    border-radius: 4px;
+    color: #3D3D3D;
+    font-size: 16px;
+
+    &:focus {
+        outline: solid 1px;
+        outline-color: #FDAA3D;
+    }
 }
-// input{
-//     width: 100%;
-// }
 
 .form {
     display: flex;
     flex-direction: column;
-    width: 600px;
+    width: 500px;
     height: 400px;
+    padding: 15px 25px;
+    background-color: #FAFAFA;
+    border-radius: 5px;
 
     .title {
         display: flex;
         flex-direction: column;
+        padding: 10px 0;
     }
 
     .price {
         display: flex;
         flex-direction: row;
         justify-content: space-between;
+        padding: 10px 0;
 
         .info {
             display: inline-block;
-            width: 130px;
+            width: 120px;
+        }
+    }
+
+    .feature {
+        display: flex;
+        flex-direction: column;
+        padding: 5px 0;
+
+        label {
+            input {
+                opacity: 0;
+                width: 0;
+                height: 0;
+            }
+            span::after {
+                content: "😶";
+            }
+
+            input:checked + span::after{
+                content: "😀";
+            }
+        }
+        span {
+            text-align: left;
+            font-family:Arial, Helvetica, sans-serif;
+            font-size: 13px;
+            color: #aaa;
+            margin: 3px 0;
         }
     }
 }
