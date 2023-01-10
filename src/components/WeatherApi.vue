@@ -8,22 +8,26 @@
                 Build atop Vue & OpenWeatherMap
             </p>
         </div>
-        <select v-model="weathers" multiple="true" class="city-list">
-            <option v-for="city in cities" v-bind:key="city">
-                {{ city }}
-            </option>
-        </select>
+        <div class="select">
+            <span class="arrow" :class="collapsed ? 'arrow-down' : 'arrow-right'" @click="menuClickHandle" ></span>
+            <select v-model="weathers" multiple="true" class="city-list" :size="showSize">
+                <option v-for="city in cities" v-bind:key="city">
+                    {{ city }}
+                </option>
+            </select>
+        </div>
+
         <div class="weathers">
             <div class="weather" v-for="cityInfo in weatherInfos" :key="cityInfo.city">
                 <div class="city">
                     {{ cityInfo.city }}
                 </div>
                 <div class="condition-text">
-                    {{cityInfo.info?.current?.condition?.text }}
+                    {{ cityInfo.info?.current?.condition?.text }}
                 </div>
                 <img class="condition-icon" :src="cityInfo.info?.current?.condition?.icon" alt="">
                 <div class="temperature">
-                    {{ cityInfo.info?.current?.temp_c }}
+                    {{ cityInfo.info?.current?.temp_c }}&ordm;C
                 </div>
             </div>
         </div>
@@ -42,10 +46,16 @@ export default {
             cities: ['Ha Noi', 'Ha Tinh', 'Can Loc', 'Ky Anh', 'Vinh', 'Manila', 'Pasay'],
             weathers: [],
             weatherInfos: [],
+            collapsed: false
         }
     },
     mounted() {
-    
+
+    },
+    computed: {
+        showSize() {
+            return this.collapsed ? this.cities.length : 1
+        }
     },
     watch: {
         weathers(newValue) {
@@ -77,6 +87,9 @@ export default {
         setCityInfo(city, data) {
             let index = this.weathers.indexOf(city)
             this.weatherInfos[index].info = data
+        },
+        menuClickHandle(){
+            this.collapsed = !this.collapsed
         }
     },
 }
@@ -88,42 +101,79 @@ export default {
     padding: 0;
     color: #fff;
 }
+.header {
+    padding: 20px;
+    .app-name {
+        padding: 5px;
+        padding-bottom: 10px;
+    }
+}
+
 .container {
     display: flex;
     flex-direction: column;
     justify-items: center;
-    background-color: rgb(92,64,132);
+    background-color: rgb(92, 64, 132);
     color: #fff;
+    min-height: 300px;
+    position: relative;
+    flex: 1;
+}
+
+.select {
+    position: relative;
+    display: block;
+    height: 30px;
+
+    .arrow {
+        position: absolute;
+        top: 4%;
+        right: calc(50% + 150px/2);
+        margin-right: 6px;
+    }
+    .arrow-right {
+        border-top: 13px solid transparent;
+        border-bottom: 13px solid transparent;
+        border-left: 20px solid rgb(3, 63, 63);
+    }
+    .arrow-down {
+        border-top: 20px solid rgb(3, 63, 63);
+        border-right: 13px solid transparent;
+        border-left: 13px solid transparent;
+        margin-top: 3px;
+    }
 }
 
 .city-list {
-    display: block;
     width: 150px;
-    height: 28px;
     text-align: left;
     overflow: hidden;
     border: 1px solid;
-    
+    position: relative;
+
+
     option {
         display: block;
-        padding: 5px ;
+        padding: 5px;
     }
 
     option:nth-child(2n - 1) {
-        background-color: rgb(151, 237, 243);
-    }
-    option:nth-child(2n) {
-        background-color: rgb(238, 241, 194);
+        background-color: rgba(4, 65, 70);
     }
 
-    &:hover {
-        height: 150px;
-        overflow: auto;
+    option:nth-child(2n) {
+        background-color: rgb(52, 124, 129);
     }
+
+
 }
+
 .weathers {
     display: flex;
     flex-direction: row;
+    top: 100px;
+    flex-wrap: wrap;
+    height: 100%;
 }
 
 .weather {
@@ -133,17 +183,22 @@ export default {
     width: 280px;
     height: 210px;
     border: 2px solid;
+    border-color: rgba(255, 255, 255, 0.4);
+    margin: 15px 10px;
+
     .city {
         font-size: 24px;
         font-weight: 500;
         margin-top: 20px;
     }
+
     .condition-text {
         font-size: 12px;
         font-weight: 200;
-        color: rgba(255, 255, 255, 0.6) ;
+        color: rgba(255, 255, 255, 0.6);
         padding: 2px;
     }
+
     .condition-icon {
         display: block;
         margin-left: auto;
@@ -151,9 +206,9 @@ export default {
         width: 80px;
         height: auto;
     }
+
     .temperature {
         font-size: 22px;
     }
 }
-
 </style>
