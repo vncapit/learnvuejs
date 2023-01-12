@@ -5,6 +5,7 @@
     <TabMenu/>
     <WeatherApiVue/>
     <PopupForm/>
+    <DigitalClock/>
   </div>
 </template>
 
@@ -14,6 +15,7 @@ import SideBar from './components/SideBar.vue'
 import TabMenu from './components/TabMenu.vue'
 import WeatherApiVue from './components/WeatherApi.vue'
 import PopupForm from './components/PopupForm.vue'
+import DigitalClock from './components/DigitalClock.vue'
 export default {
   name: 'App',
   components: {
@@ -21,7 +23,8 @@ export default {
     SideBar,
     TabMenu,
     WeatherApiVue,
-    PopupForm
+    PopupForm,
+    DigitalClock
 
   }
 }
