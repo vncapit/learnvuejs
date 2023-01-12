@@ -116,6 +116,7 @@ export default {
     height: 400px;
     background-repeat: no-repeat;
     background-size: cover;
+    background-position: 0;
     border-radius: 7px;
     &::after {
         content: '';
