@@ -2,7 +2,7 @@
     <div class="container">
         <form action="" class="form">
             <div class="error-message">
-                Oh, please enter a valid email address.
+                <span v-show="!formData.email.valid">Oh, please enter a valid email address.</span>
             </div>
             <fieldset>
                 <legend>Vue Contact Form</legend>
@@ -27,7 +27,8 @@
                     <label>Framework</label>
                     <ul v-if="frameworks.length">
                         <li v-for="framework in frameworks" :key="framework.id">
-                            <input type="radio" :value="framework.value" :id="`radio-${framework.id}`" name="radio">
+                            <input type="radio" :value="framework.value" :id="`radio-${framework.id}`" name="radio"
+                                v-model="formData.selection.framework">
                             <label :for="`radio-${framework.id}`">{{ framework.name }}</label>
                         </li>
                     </ul>
@@ -36,19 +37,20 @@
                     <label>Features</label>
                     <ul v-if="features.length">
                         <li v-for="(feature, index ) in features" :key="index">
-                            <input type="checkbox" :value="feature" :id="`checkbox-${index}`">
+                            <input type="checkbox" v-model="formData.selection.features" :id="`checkbox-${index}`"
+                                :value="feature">
                             <label :for="`checkbox-${index}`">{{ feature }}</label>
                         </li>
                         <li>
-                            <input type="checkbox" value="all" id="checkbox-all">
+                            <input type="checkbox" value="all" id="checkbox-all" @change="handleChangeAll($event)">
                             <label for="checkbox-all">Check All</label>
                         </li>
                     </ul>
                 </div>
                 <div class="form-field">
                     <label>Message with Counter</label>
-                    <textarea name="" maxlength="255" required="true">Dear Mr. President,</textarea>
-                    <span class="counter">100/255</span>
+                    <textarea name="" maxlength="255" required="true" v-model="formData.message.text"></textarea>
+                    <span class="counter">{{formData.message.text.length + '/' + formData.message.maxlength}}</span>
                 </div>
                 <div class="submit">
                     <input type="submit" value="Send Form">
@@ -56,13 +58,14 @@
             </fieldset>
         </form>
         <div class="form-info">
-
+            <pre><code>{{ formData }}</code></pre>
         </div>
 
     </div>
 </template>
 
 <script>
+
 export default {
     name: 'ContactForm',
     data() {
@@ -79,7 +82,8 @@ export default {
             features: [
                 "Reactivity", "Encapsulation", "Data Binding"
             ],
-            formData: {
+            formData:
+            {
                 name: "Cap",
                 email: {
                     value: "vncapit@gmail.com",
@@ -94,25 +98,39 @@ export default {
                     member: "1",
                     framework: "vue",
                     features: [
-                        "Reactivity",
-                        "Encapsulation",
-                        "Data Binding"
+                        "Reactivity", "Encapsulation",
                     ]
                 },
                 message: {
-                    text: "sasd",
+                    text: "",
                     maxlength: 255
                 },
-            }
+            },
         }
     },
     methods: {
-        name() {
 
+        handleChangeAll($event) {
+            console.log($event.target)
+            if ($event.target.checked) {
+                this.formData.selection.features = [...this.features];
+            }
+            else {
+                this.formData.selection.features = [];
+            }
         }
     },
-
+    watch: {
+        "formData.email.value": {
+            handler(newValue) {
+                //eslint-disable-next-line
+                this.formData.email.valid = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(newValue);
+            },
+            deep: true
+        },
+    }
 }
+
 </script>
 
 <style lang="scss" scoped>
@@ -149,12 +167,15 @@ ul {
         width: 100%;
         height: 45px;
         text-align: center;
-        border-radius: 4px;
-        background-color: #f74747;
         color: #fff;
         font-family: Arial, Helvetica, sans-serif;
         font-size: 18px;
         line-height: 45px;
+        span {
+            display: block;
+            background-color: #f74747;
+            border-radius: 4px;
+        }
     }
 
     fieldset {
@@ -207,6 +228,10 @@ ul {
 
                     &:focus {
                         outline: none;
+                    }
+
+                    &:checked {
+                        animation: inputChange 0.15s ;
                     }
                 }
 
@@ -270,5 +295,29 @@ ul {
     height: 730px;
     background: #1C0C2F;
     border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    pre {
+        display: block;
+        margin: 10px;
+        text-align: left;
+        color: #e2e5e6;
+        font-size: 18px;
+        line-height: 1.5rem;
+    }
+}
+
+@keyframes inputChange {
+    0% {
+        scale: 0.8;
+    }
+    70% {
+        scale: 1.2;
+    }
+    100% {
+        scale: 0.8;
+    }
 }
 </style>
