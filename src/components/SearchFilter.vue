@@ -152,8 +152,8 @@ export default {
         display: flex;
         flex-direction: row;
         flex-wrap: wrap;
-        width: 400px;
-        justify-content: space-between;
+        width: 415px;
+        justify-content: flex-start;
         user-select: none;
 
         .card {
@@ -163,7 +163,7 @@ export default {
             width: 125px;
             height: 170px;
             padding-top: 10px;
-            margin-top: 10px;
+            margin: 6px;
 
             img {
                 width: 100px;
