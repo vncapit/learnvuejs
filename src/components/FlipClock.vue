@@ -97,7 +97,7 @@ export default {
         align-items: center;
         width: 105px;
         height: 110px;
-        margin-left: 15px;
+        margin-left: 30px;
     }
 }
 </style>

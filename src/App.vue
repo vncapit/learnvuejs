@@ -8,6 +8,8 @@
     <DigitalClock/>
     <ContactForm/>
     <FlipClock/>
+    <SearchFilter/>
+
   </div>
 </template>
 
@@ -20,6 +22,8 @@ import PopupForm from './components/PopupForm.vue'
 import DigitalClock from './components/DigitalClock.vue'
 import ContactForm from './components/ContactForm.vue'
 import FlipClock from './components/FlipClock.vue'
+import SearchFilter from './components/SearchFilter.vue'
+
 
 export default {
   name: 'App',
@@ -32,6 +36,7 @@ export default {
     DigitalClock,
     ContactForm,
     FlipClock,
+    SearchFilter
 }
 }
 </script>
