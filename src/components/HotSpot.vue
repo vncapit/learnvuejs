@@ -18,7 +18,7 @@ export default {
 
 </script>
 
-<style lang="css" scoped>
+<style lang="scss" scoped>
 * {
     margin: 0;
     padding: 0;
@@ -26,6 +26,7 @@ export default {
 }
 
 .container {
+    position: relative;
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -33,13 +34,14 @@ export default {
     width: 100%;
     height: 800px;
     background: linear-gradient(45deg, #27A3F1, #BB1CF2);
-}
-
-.bgr {
+    .bgr {
     width: 800px;
     height: 550px;
     background-image: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/437221/hotspot-image.jpg');
     background-size: cover;
 }
+
+}
+
 
 </style>

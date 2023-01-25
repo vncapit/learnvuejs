@@ -89,7 +89,7 @@ export default {
     computed: {
         card_filtered() {
             return this.cards.filter(
-                card => card.title.includes(this.search)
+                card => card.title.toLowerCase().includes(this.search.toLowerCase())
             )
         }
     },
