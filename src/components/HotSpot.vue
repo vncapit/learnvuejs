@@ -1,7 +1,9 @@
 <template>
     <div class="container">
         <div class="bgr">
-            <HotSpotEl/>
+            <div v-for="item in items" :key="item.name">
+                <HotSpotEl :data="item"/>
+            </div>  
         </div>
 
     </div>
@@ -9,10 +11,25 @@
 
 <script>
 import HotSpotEl from '@/components/commons/HotSpotEl.vue';
+
+function Item(name, top, left, price) {
+    this.name = name;
+    this.top = top;
+    this.left = left;
+    this.price = price;
+}
+
 export default {
     name: 'HotSpot',
     components: {
         HotSpotEl,
+    },
+    data() {
+        return {
+            items: [
+                new Item('Mac', 20, 38, 1000), new Item('Keyboard', 84, 47, 99), new Item('Mouse', 84, 75, 120)
+            ]
+        }
     },
 }
 
@@ -23,6 +40,7 @@ export default {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-size: 16px;
 }
 
 .container {
@@ -34,14 +52,17 @@ export default {
     width: 100%;
     height: 800px;
     background: linear-gradient(45deg, #27A3F1, #BB1CF2);
+
     .bgr {
-    width: 800px;
-    height: 550px;
-    background-image: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/437221/hotspot-image.jpg');
-    background-size: cover;
-}
+        position: relative;
+        max-width: 800px;
+        max-height: 550px;
+        width: 80vw;
+        height: 55vw;
+        background-image: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/437221/hotspot-image.jpg');
+        background-size: contain;
+        background-repeat: no-repeat;
+    }
 
 }
-
-
 </style>

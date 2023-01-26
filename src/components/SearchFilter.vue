@@ -93,8 +93,6 @@ export default {
             )
         }
     },
-
-
 }
 </script>
 
@@ -152,7 +150,7 @@ export default {
         display: flex;
         flex-direction: row;
         flex-wrap: wrap;
-        width: 415px;
+        width: 430px;
         justify-content: flex-start;
         user-select: none;
 
@@ -163,7 +161,7 @@ export default {
             width: 125px;
             height: 170px;
             padding-top: 10px;
-            margin: 6px;
+            margin: 8px;
 
             img {
                 width: 100px;
@@ -189,7 +187,11 @@ export default {
 
             .title {
                 font-size: 24px;
+            }   
+            &:hover {
+                transform: scale(1.1);
             }
+            transition: all 0.3s;
         }
     }
 }
