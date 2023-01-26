@@ -32,7 +32,7 @@ export default {
         setTimeout(() => {
             let priceWidth = this.$refs.price.clientWidth;
             let center = (24 - priceWidth) / 2;
-            this.price_pos = `top: -27px; left: ${center}px`;
+            this.price_pos = `top: -28px; left: ${center}px`;
             console.log(priceWidth)
             console.log(this.price_pos);
         }, 100);
@@ -63,7 +63,7 @@ span {
     left: 0;
     z-index: 0;
     cursor: pointer;
-    color: rgba($color: #000000, $alpha: 0);
+    color: rgba($color: #ffffff, $alpha: 0);
 
     &::before {
         content: "";
@@ -86,7 +86,7 @@ span {
         left: 0;
         width: 100%;
         height: 100%;
-        background-color: rgb(184, 176, 176);
+        background-color: rgb(121, 113, 113);
         border-radius: 50%;
         z-index: 0;
         animation: wave 3s linear infinite;
@@ -104,16 +104,20 @@ span {
             z-index: 0;
             outline: 3px solid rgb(255, 255, 255);
             outline-offset: 5px;
-        }
-
-        .price {
-            position: absolute;
-            text-align: center;
-            align-content: center;
+            animation: outline 1.8s linear infinite;
         }
 
         color: rgb(255, 255, 255);
+        .price{
+            transform: scale(1);
+            transition: all 0.25s;
+        }
 
+    }
+
+    .price {
+        position: absolute;
+        transform: scale(0);
     }
 }
 
@@ -130,6 +134,15 @@ svg {
 
 .icon {
     color: #CF00F1;
+}
+
+@keyframes outline {
+    0%, 100% {
+        outline-color: #fff;
+    }
+    50% {
+        outline-color: #CF00F1;
+    }
 }
 
 @keyframes pulse {
