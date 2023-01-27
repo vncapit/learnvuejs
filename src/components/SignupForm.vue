@@ -2,29 +2,35 @@
     <div class="container">
         <h1>SIGN UP FORM (CODED)</h1>
         <p>Based on <a href="!#">Sign Up Design #39</a> by Denis Abdullin</p>
+
         <div class="form">
-            <form class="register" method="post">
-                <div class="fields">
-                    <label for="email">Email</label>
-                    <input class="email" type="text" name="email" id="email" v-model="email">
-                    <span class="msg">{{ emailMsg }}</span>
-                    <label for="password">Password <span>(6 or more characters required)</span></label>
-                    <input class="password" type="password" name="password" id="password" v-model="password">
-                    <span class="msg">{{ passwordMsg }}</span>
-                    <label for="repeat_password">Repeat Password</label>
-                    <input class="repeat_password" type="password" name="repeat_password" id="repeat_password"
-                        v-model="repeatPassword">
-                    <span class="msg">{{ repeatPasswordMsg }}</span>
-                </div>
-                <div class="action">
-                    <input type="submit" value="Sign Up">
-                    <span>teams & conditions</span>
-                </div>
+            <transition name="fade" mode="out-in">
+                <form class="register" method="post" v-if="isShowForm">
+                    <div class="fields">
+                        <label for="email">Email</label>
+                        <input class="email" type="text" name="email" id="email" v-model="email">
+                        <span class="msg">{{ emailMsg }}</span>
+                        <label for="password">Password <span>(6 or more characters required)</span></label>
+                        <input class="password" type="password" name="password" id="password" v-model="password">
+                        <span class="msg">{{ passwordMsg }}</span>
+                        <label for="repeat_password">Repeat Password</label>
+                        <input class="repeat_password" type="password" name="repeat_password" id="repeat_password"
+                            v-model="repeatPassword">
+                        <span class="msg">{{ repeatPasswordMsg }}</span>
+                    </div>
+                    <div class="action">
+                        <input type="submit" value="Sign Up"
+                            :disabled="!(emailValid && passwordValid && repeatPasswordValid)">
+                        <span @click="showForm(false)">teams & conditions</span>
+                    </div>
 
-            </form>
-            <div class="terms">
-
-            </div>
+                </form>
+                <div class="terms" v-if="!isShowForm">
+                    <h2>TERMS & CONDITIONS</h2>
+                    <P>A list of terms, conditions, and policies</P>
+                    <button @click="showForm(true)">Back</button>
+                </div>
+            </transition>
         </div>
     </div>
 </template>
@@ -41,16 +47,18 @@ export default {
             password: '',
             repeatPassword: '',
             emailValid: false,
-            passwordValid: true,
-            repeatPasswordValid: true,
+            passwordValid: false,
+            repeatPasswordValid: false,
             emailMsg: '',
             passwordMsg: '',
             repeatPasswordMsg: '',
+            isShowForm: true,
         }
     },
     methods: {
-        name() {
-
+        showForm(event) {
+            console.log(event)
+            this.isShowForm = event;
         }
     },
     watch: {
@@ -119,6 +127,14 @@ export default {
     box-sizing: border-box;
 }
 
+.fade-enter-active, .fade-leave-active {
+  transition: all .6s;
+}
+.fade-enter, .fade-leave-active {
+  opacity: 0;
+  transform: translateX(-40px);
+}
+
 .container {
     display: flex;
     flex-direction: column;
@@ -142,7 +158,8 @@ export default {
         position: relative;
         box-shadow: 5px 10px 30px rgb(116, 113, 113);
         display: flex;
-        flex-direction: row-reverse;
+        flex-direction: column;
+        align-items: flex-end;
 
         &::before {
             content: '';
@@ -158,7 +175,6 @@ export default {
         }
 
         .register {
-            position: absolute;
             z-index: 1;
             display: flex;
             flex-direction: column;
@@ -166,6 +182,7 @@ export default {
             height: 400px;
             margin-top: 30px;
             margin-right: 25px;
+            position: absolute;
 
             .fields {
                 .msg {
@@ -223,10 +240,17 @@ export default {
                     background: linear-gradient(45deg, rgb(230, 198, 22), rgb(241, 118, 17));
                     border: none;
                     width: 85px;
-                    height: 27px;
+                    height: 28px;
                     border-radius: 13px;
                     cursor: pointer;
                     font-size: 14px;
+                    font-weight: 600;
+                    color: #fff;
+
+                    &:disabled {
+                        cursor: default;
+                        background: linear-gradient(45deg, rgba(230, 198, 22, 0.5), rgba(241, 118, 17, 0.5));
+                    }
                 }
 
                 span {
@@ -234,6 +258,31 @@ export default {
                     line-height: 27px;
                     cursor: pointer;
                 }
+            }
+        }
+
+        .terms {
+            position: absolute;
+            z-index: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            width: 300px;
+            height: 400px;
+            margin-top: 30px;
+            margin-right: 25px;
+
+            h2 {
+                font-size: 16px;
+                margin-top: 40px;
+            }
+
+            p {
+                font-size: 14px;
+                margin-top: 15px;
+            }
+            button {
+                margin-top: 15px;
             }
         }
     }
