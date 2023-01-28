@@ -5,7 +5,7 @@
 
         <div class="form">
             <transition name="fade" mode="out-in">
-                <form class="register" method="post" v-if="isShowForm">
+                <form class="register" v-if="showFormType == 0">
                     <div class="fields">
                         <label for="email">Email</label>
                         <input class="email" type="text" name="email" id="email" v-model="email">
@@ -19,16 +19,29 @@
                         <span class="msg">{{ repeatPasswordMsg }}</span>
                     </div>
                     <div class="action">
-                        <input type="submit" value="Sign Up"
-                            :disabled="!(emailValid && passwordValid && repeatPasswordValid)">
-                        <span @click="showForm(false)">teams & conditions</span>
+                        <button type="button" @click="showForm(1)"
+                            :disabled="!(emailValid && passwordValid && repeatPasswordValid)">Sign Up</button>
+                        <span @click="showForm(2)">teams & conditions</span>
                     </div>
-
                 </form>
-                <div class="terms" v-if="!isShowForm">
+                <div class="terms" v-if="showFormType == 2">
                     <h2>TERMS & CONDITIONS</h2>
                     <P>A list of terms, conditions, and policies</P>
-                    <button @click="showForm(true)">Back</button>
+                    <button @click="showForm(0)">Back</button>
+                </div>
+                <div class="submited" v-if="showFormType == 1">
+                    <h2>
+                        FORM SUBMIT SUCCESSFUL
+                    </h2>
+                    <p>
+                        Form data gets saved and/or sent to server. There could also be a confirmation sent to email
+                        address
+                    </p>
+                    <p>
+                        Button would take you to some sort of after signup page.
+                        In this case it just shows the form again
+                    </p>
+                    <button @click="showForm(0)">Continue</button>
                 </div>
             </transition>
         </div>
@@ -52,14 +65,13 @@ export default {
             emailMsg: '',
             passwordMsg: '',
             repeatPasswordMsg: '',
-            isShowForm: true,
+            showFormType: 0,
         }
     },
     methods: {
         showForm(event) {
-            console.log(event)
-            this.isShowForm = event;
-        }
+            this.showFormType = event;
+        },
     },
     watch: {
         email(newValue) {
@@ -127,12 +139,15 @@ export default {
     box-sizing: border-box;
 }
 
-.fade-enter-active, .fade-leave-active {
-  transition: all .6s;
+.fade-enter-active,
+.fade-leave-active {
+    transition: all .6s;
 }
-.fade-enter, .fade-leave-active {
-  opacity: 0;
-  transform: translateX(-40px);
+
+.fade-enter,
+.fade-leave-active {
+    opacity: 0;
+    transform: translateX(-40px);
 }
 
 .container {
@@ -236,7 +251,7 @@ export default {
                 justify-content: space-between;
                 margin-top: 40px;
 
-                input {
+                button {
                     background: linear-gradient(45deg, rgb(230, 198, 22), rgb(241, 118, 17));
                     border: none;
                     width: 85px;
@@ -261,7 +276,7 @@ export default {
             }
         }
 
-        .terms {
+        .terms, .submited {
             position: absolute;
             z-index: 1;
             display: flex;
@@ -280,7 +295,9 @@ export default {
             p {
                 font-size: 14px;
                 margin-top: 15px;
+                text-align: left;
             }
+
             button {
                 margin-top: 15px;
             }

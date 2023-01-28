@@ -111,7 +111,6 @@ export default {
     methods: {
 
         handleChangeAll($event) {
-            console.log($event.target)
             if ($event.target.checked) {
                 this.formData.selection.features = [...this.features];
             }

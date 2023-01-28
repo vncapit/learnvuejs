@@ -95,14 +95,9 @@ export default {
             },
             deep: true
         },
-        isChecked(newValue) {
-            console.log(newValue)
-        }
-
     },
     mounted() {
         if (localStorage.todoList) {
-            console.log(localStorage.getItem('todoList'))
             this.todoList = JSON.parse(localStorage.getItem('todoList'));
         }
     },

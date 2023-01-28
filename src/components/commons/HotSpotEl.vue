@@ -33,8 +33,6 @@ export default {
             let priceWidth = this.$refs.price.clientWidth;
             let center = (24 - priceWidth) / 2;
             this.price_pos = `top: -28px; left: ${center}px`;
-            console.log(priceWidth)
-            console.log(this.price_pos);
         }, 100);
     },
 }

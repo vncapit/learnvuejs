@@ -28,8 +28,7 @@ export default {
         },
     },
     watch: {
-        num(newValue) {
-            console.log(newValue);
+        num() {
             this.isShowFront = !this.isShowFront;
 
             this.$refs.card.classList.add('flip')

@@ -67,7 +67,6 @@ export default {
                 })
                 this.getWeatherData(city)
             });
-            console.log(this.weatherInfos)
         }
     },
     methods: {

@@ -76,7 +76,6 @@ export default {
         mouseMoveHandle(e) {
             this.coordinates.x = e.clientX - (this.$refs.menu.getBoundingClientRect().x + this.$refs.menu.clientWidth / 2);
             this.coordinates.y = e.clientY - (this.$refs.menu.getBoundingClientRect().y + this.$refs.menu.clientHeight / 2);
-            console.log(`${this.coordinates.x} , ${this.coordinates.y}`)
 
         },
         mouseOutHandle() {
