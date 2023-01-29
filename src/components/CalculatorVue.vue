@@ -3,40 +3,44 @@
         <div class="calculator">
             <div class="display">
                 <div class="result">
-                    <div>{{ result}}</div>
+                    <div>{{ result }}</div>
                 </div>
                 <div class="expression">
-                    <div>{{ expression }}</div>
+                    <div>{{ expressionRaw }}</div>
                 </div>
             </div>
             <div class="numpad">
                 <div class="row">
-                    <span @click="clickHandle($event)" class="num" id="7">7</span>
-                    <span @click="clickHandle($event)" class="num" id="8">8</span>
-                    <span @click="clickHandle($event)" class="num" id="9">9</span>
+                    <span value="7" @click="clickHandle($event)" class="num" id="7">7</span>
+                    <span value="8" @click="clickHandle($event)" class="num" id="8">8</span>
+                    <span value="9" @click="clickHandle($event)" class="num" id="9">9</span>
                 </div>
                 <div class="row">
-                    <span @click="clickHandle($event)" class="num" id="4">4</span>
-                    <span @click="clickHandle($event)" class="num" id="5">5</span>
-                    <span @click="clickHandle($event)" class="num" id="6">6</span>
+                    <span value="4" @click="clickHandle($event)" class="num" id="4">4</span>
+                    <span value="5" @click="clickHandle($event)" class="num" id="5">5</span>
+                    <span value="6" @click="clickHandle($event)" class="num" id="6">6</span>
                 </div>
                 <div class="row">
-                    <span @click="clickHandle($event)" class="num" id="1">1</span>
-                    <span @click="clickHandle($event)" class="num" id="2">2</span>
-                    <span @click="clickHandle($event)" class="num" id="3">3</span>
+                    <span value="1" @click="clickHandle($event)" class="num" id="1">1</span>
+                    <span value="2" @click="clickHandle($event)" class="num" id="2">2</span>
+                    <span value="3" @click="clickHandle($event)" class="num" id="3">3</span>
                 </div>
                 <div class="row">
-                    <span @click="clickHandle($event)" class="num dot" id="dot">.</span>
-                    <span @click="clickHandle($event)" class="num" id="0">0</span>
+                    <span value="." @click="clickHandle($event)" class="num dot" id="dot">.</span>
+                    <span value="0" @click="clickHandle($event)" class="num" id="0">0</span>
                 </div>
                 <span @click="clickHandle($event)" class="equal" id="=">=</span>
                 <div class="operator-group">
-                        <span @click="clickHandle($event)" class="operator" id="ac">AC</span>
-                        <i @click="clickHandle($event)" class="fa-solid fa-plus operator" id="plus">+</i>
-                        <i @click="clickHandle($event)" class="fa-sharp fa-solid fa-minus operator" id="minus">-</i>
-                        <i @click="clickHandle($event)" class="fa-solid fa-xmark operator" id="multi">*</i>
-                        <i @click="clickHandle($event)" class="fa-sharp fa-solid fa-divide operator" id="divide">/</i>
-                    </div>
+                    <span value="7" @click="clickHandle($event)" class="operator" id="ac">AC</span>
+                    <i value=" + " operator="+" @click="clickHandle($event)" class="fa-solid fa-plus operator"
+                        id="plus"></i>
+                    <i value=" - " operator="+" @click="clickHandle($event)" class="fa-sharp fa-solid fa-minus operator"
+                        id="minus"></i>
+                    <i value=" x " operator="+" @click="clickHandle($event)" class="fa-solid fa-xmark operator"
+                        id="multi"></i>
+                    <i value=" / " operator="+" @click="clickHandle($event)"
+                        class="fa-sharp fa-solid fa-divide operator" id="divide"></i>
+                </div>
             </div>
         </div>
 
@@ -50,25 +54,49 @@ export default {
         return {
             result: '',
             expression: '',
+            expressionRaw: '',
+        }
+    },
+    watch: {
+        expression(newValue) {
+            let cur_result = '';
+
+            try {
+                cur_result = eval(newValue);
+                this.result = cur_result;
+
+            }
+            /* eslint-disable */
+            catch (error) {
+
+            }
         }
     },
     methods: {
         clickHandle($event) {
             this.animaHandle($event);
             let id = $event.target.id;
-            if(id == 'ac') {
+
+            if (id == 'ac') {
                 this.acHandle();
                 return;
             }
-            if(id == '=') {
-                this.result = eval(this.expression);
+            if (id == '=') {
+                try {
+                this.expressionRaw = eval(this.expression);
+                } catch (error) {
+                    
+                }
                 return;
             }
-            this.expression += $event.target.innerText;
+            this.expressionRaw += $event.target.getAttribute('value');
+            this.expression = this.expressionRaw.replace("x", "*").trimStart();
+
         },
         acHandle() {
             this.result = '';
             this.expression = '';
+            this.expressionRaw = '';
         },
         animaHandle(e) {
 
@@ -146,6 +174,7 @@ export default {
                 height: 100px;
                 display: flex;
                 flex-direction: row-reverse;
+
                 div {
                     font-family: 'Times New Roman', Times, serif;
                     font-size: 28px;
