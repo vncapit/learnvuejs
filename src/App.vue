@@ -11,6 +11,7 @@
     <SearchFilter/>
     <HotSpot/>
     <SignupForm/>
+    <CalculatorVue/>
   </div>
 </template>
 
@@ -26,6 +27,7 @@ import FlipClock from './components/FlipClock.vue'
 import SearchFilter from './components/SearchFilter.vue'
 import HotSpot from '@/components/HotSpot.vue';
 import SignupForm from '@/components/SignupForm.vue';
+import CalculatorVue from '@/components/CalculatorVue.vue';
 
 export default {
   name: 'App',
@@ -40,7 +42,8 @@ export default {
     FlipClock,
     SearchFilter,
     HotSpot,
-    SignupForm
+    SignupForm,
+    CalculatorVue
 }
 }
 </script>
