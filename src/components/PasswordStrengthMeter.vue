@@ -3,7 +3,7 @@
         <div class="password_meter">
             <h1>Vue Password Strength Meter</h1>
             <div class="password">
-                <input v-model="password" type="password">
+                <input :class="{'input_ok' : (hasLowercase && hasNumeric && hasUppercase)}" v-model="password" type="password">
                 <span :class="{'password_ok' : (hasLowercase && hasNumeric && hasUppercase)}">{{ password.length }}</span>
             </div>
             <div class="meter_group">
@@ -114,12 +114,19 @@ export default {
                 margin: 5px auto;
                 border-radius: 3px;
                 border: none;
-                background-color: rgb(222, 226, 231);
+                transition: background 0.4s linear;
+                background: linear-gradient(to right,rgb(27, 141, 65) 50%,#eee 50%);
+                background-size: 200% 100%;
+                background-position: right;
 
                 &:focus {
                     outline: 1px solid rgb(115, 139, 241);
                 }
 
+            }
+
+            .input_ok {
+                background-position: left;
             }
 
             span {
