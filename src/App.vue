@@ -12,6 +12,7 @@
     <HotSpot/>
     <SignupForm/>
     <CalculatorVue/>
+    <PasswordStrengthMeter/>
   </div>
 </template>
 
@@ -28,6 +29,7 @@ import SearchFilter from './components/SearchFilter.vue'
 import HotSpot from '@/components/HotSpot.vue';
 import SignupForm from '@/components/SignupForm.vue';
 import CalculatorVue from '@/components/CalculatorVue.vue';
+import PasswordStrengthMeter from '@/components/PasswordStrengthMeter.vue';
 
 export default {
   name: 'App',
@@ -43,7 +45,8 @@ export default {
     SearchFilter,
     HotSpot,
     SignupForm,
-    CalculatorVue
+    CalculatorVue,
+    PasswordStrengthMeter
 }
 }
 </script>
