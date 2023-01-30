@@ -89,7 +89,7 @@ export default {
                 return;
             }
             this.expressionRaw += value;
-            this.expression = this.expressionRaw.replace("x", "*").trimStart();
+            this.expression = this.expressionRaw.replace(/x/g, "*").trimStart();
 
         },
         acHandle() {
