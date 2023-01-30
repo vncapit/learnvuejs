@@ -3,7 +3,7 @@
         <div class="calculator">
             <div class="display">
                 <div class="result">
-                    <div>{{ result }}</div>
+                    <div :class="{'big_number' : isBigNumber }" >{{ result }}</div>
                 </div>
                 <div class="expression">
                     <div>{{ expressionRaw }}</div>
@@ -11,35 +11,33 @@
             </div>
             <div class="numpad">
                 <div class="row">
-                    <span value="7" @click="clickHandle($event)" class="num" id="7">7</span>
-                    <span value="8" @click="clickHandle($event)" class="num" id="8">8</span>
-                    <span value="9" @click="clickHandle($event)" class="num" id="9">9</span>
+                    <span value="7" @click="clickHandle($event)" class="num">7</span>
+                    <span value="8" @click="clickHandle($event)" class="num">8</span>
+                    <span value="9" @click="clickHandle($event)" class="num">9</span>
                 </div>
                 <div class="row">
-                    <span value="4" @click="clickHandle($event)" class="num" id="4">4</span>
-                    <span value="5" @click="clickHandle($event)" class="num" id="5">5</span>
-                    <span value="6" @click="clickHandle($event)" class="num" id="6">6</span>
+                    <span value="4" @click="clickHandle($event)" class="num">4</span>
+                    <span value="5" @click="clickHandle($event)" class="num">5</span>
+                    <span value="6" @click="clickHandle($event)" class="num">6</span>
                 </div>
                 <div class="row">
-                    <span value="1" @click="clickHandle($event)" class="num" id="1">1</span>
-                    <span value="2" @click="clickHandle($event)" class="num" id="2">2</span>
-                    <span value="3" @click="clickHandle($event)" class="num" id="3">3</span>
+                    <span value="1" @click="clickHandle($event)" class="num">1</span>
+                    <span value="2" @click="clickHandle($event)" class="num">2</span>
+                    <span value="3" @click="clickHandle($event)" class="num">3</span>
                 </div>
                 <div class="row">
-                    <span value="." @click="clickHandle($event)" class="num dot" id="dot">.</span>
-                    <span value="0" @click="clickHandle($event)" class="num" id="0">0</span>
+                    <span value="." @click="clickHandle($event)" class="num dot">.</span>
+                    <span value="0" @click="clickHandle($event)" class="num">0</span>
                 </div>
-                <span @click="clickHandle($event)" class="equal" id="=">=</span>
+                <span value=" = " @click="clickHandle($event)" class="equal">=</span>
                 <div class="operator-group">
-                    <span value="7" @click="clickHandle($event)" class="operator" id="ac">AC</span>
-                    <i value=" + " operator="+" @click="clickHandle($event)" class="fa-solid fa-plus operator"
-                        id="plus"></i>
-                    <i value=" - " operator="+" @click="clickHandle($event)" class="fa-sharp fa-solid fa-minus operator"
-                        id="minus"></i>
-                    <i value=" x " operator="+" @click="clickHandle($event)" class="fa-solid fa-xmark operator"
-                        id="multi"></i>
+                    <span value=" ac " @click="clickHandle($event)" class="operator">AC</span>
+                    <i value=" + " operator="+" @click="clickHandle($event)" class="fa-solid fa-plus operator"></i>
+                    <i value=" - " operator="+" @click="clickHandle($event)"
+                        class="fa-sharp fa-solid fa-minus operator"></i>
+                    <i value=" x " operator="+" @click="clickHandle($event)" class="fa-solid fa-xmark operator"></i>
                     <i value=" / " operator="+" @click="clickHandle($event)"
-                        class="fa-sharp fa-solid fa-divide operator" id="divide"></i>
+                        class="fa-sharp fa-solid fa-divide operator"></i>
                 </div>
             </div>
         </div>
@@ -55,6 +53,7 @@ export default {
             result: '',
             expression: '',
             expressionRaw: '',
+            isBigNumber: false,
         }
     },
     watch: {
@@ -64,7 +63,7 @@ export default {
             try {
                 cur_result = eval(newValue);
                 this.result = cur_result;
-
+                this.isBigNumber = (cur_result + '').length > 12;
             }
             /* eslint-disable */
             catch (error) {
@@ -75,21 +74,21 @@ export default {
     methods: {
         clickHandle($event) {
             this.animaHandle($event);
-            let id = $event.target.id;
+            let value = $event.target.getAttribute('value');
 
-            if (id == 'ac') {
+            if (value == ' ac ') {
                 this.acHandle();
                 return;
             }
-            if (id == '=') {
+            if (value == ' = ') {
                 try {
-                this.expressionRaw = eval(this.expression);
+                    this.expressionRaw = eval(this.expression);
                 } catch (error) {
-                    
+
                 }
                 return;
             }
-            this.expressionRaw += $event.target.getAttribute('value');
+            this.expressionRaw += value;
             this.expression = this.expressionRaw.replace("x", "*").trimStart();
 
         },
@@ -100,7 +99,7 @@ export default {
         },
         animaHandle(e) {
 
-            if (['multi', 'divide', 'plus', 'minus', '='].includes(e.target.id)) {
+            if ([' * ', ' / ', ' + ', ' - ', ' = '].includes(e.target.getAttribute('value'))) {
                 e.target.classList.add('released_2');
                 setTimeout(() => {
                     e.target.classList.remove('released_2');
@@ -149,6 +148,7 @@ export default {
         border-radius: 6px;
         background-color: #191B1D;
         box-shadow: 10px 10px 60px 0px;
+        user-select: none;
 
         .display {
             width: 100%;
@@ -165,6 +165,14 @@ export default {
                     font-size: 45px;
                     font-weight: 600;
                     color: #1939F6;
+                    padding-right: 15px;
+                    padding-left: 15px;
+                    overflow: hidden;
+
+                }
+
+                .big_number {
+                    font-size: 30px;
                 }
             }
 
@@ -179,6 +187,9 @@ export default {
                     font-family: 'Times New Roman', Times, serif;
                     font-size: 28px;
                     color: #fefeff;
+                    padding-right: 15px;
+                    padding-left: 15px;
+                    overflow: hidden;
                 }
             }
         }
