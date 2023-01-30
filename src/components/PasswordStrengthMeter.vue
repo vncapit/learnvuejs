@@ -4,20 +4,20 @@
             <h1>Vue Password Strength Meter</h1>
             <div class="password">
                 <input v-model="password" type="password">
-                <span>{{ password.length }}</span>
+                <span :class="{'password_ok' : (hasLowercase && hasNumeric && hasUppercase)}">{{ password.length }}</span>
             </div>
             <div class="meter_group">
                 <span ref="lowercase" class="meter">Lowercase
-                    <span class="masker" :class="{ 'check_ok': hasLowercase }"></span>
-                    <span>Lowercase</span>
+                    <span class="mask_bgr" :class="{ 'ok_bgr_anim': hasLowercase }"></span>
+                    <span class="mask_text" :class="{'ok_text_color' : hasLowercase}">Lowercase</span>
                 </span>
-                <span ref="number" class="meter" >Number
-                    <span class="masker" :class="{ 'check_ok': hasNumeric }"></span>
-                    <span>Numeric</span>
+                <span ref="number" class="meter" >Numeric
+                    <span class="mask_bgr" :class="{ 'ok_bgr_anim': hasNumeric }"></span>
+                    <span class="mask_text" :class="{'ok_text_color' : hasNumeric}">Numeric</span>
                 </span>
                 <span ref="uppercase" class="meter">Uppercase
-                    <span class="masker"  :class="{ 'check_ok': hasUppercase }"></span>
-                    <span>Uppercase</span>
+                    <span class="mask_bgr"  :class="{ 'ok_bgr_anim': hasUppercase }"></span>
+                    <span class="mask_text" :class="{'ok_text_color' : hasUppercase}">Uppercase</span>
                 </span>
             </div>
         </div>
@@ -88,6 +88,12 @@ export default {
     align-items: center;
     width: 100%;
     height: 400px;
+    background: linear-gradient(26deg, rgb(168, 61, 133), rgb(214, 247, 71));
+
+    .password_ok {
+        background-color: rgb(7, 87, 7) !important;
+        color: #fff !important;
+    }
 
     .password_meter {
         width: 300px;
@@ -144,7 +150,8 @@ export default {
                 background-color: rgb(222, 226, 231);
                 border-radius: 3px;
 
-                .masker {
+
+                .mask_bgr {
                     position: absolute;
                     top: 0%;
                     left: 0%;
@@ -152,13 +159,24 @@ export default {
                     height: 100%;
                     border-radius: 3px;
                     background-color: rgb(37, 99, 28);
-
-                    color: #fff;
-                    overflow: hidden;
+                    transition: all 0.4s linear;
                 }
 
-                .check_ok {
-                    animation: progress 2s forwards;
+                .mask_text {
+                    position: absolute;
+                    top: 0%;
+                    left: 0%;
+                    width: 100%;
+                    height: 100%;
+                }
+
+                .ok_bgr_anim {
+                    width: 100%;
+                    color: #fff !important;
+                }
+                .ok_text_color {
+
+                    color: #fff !important;
                 }
             }
         }
@@ -170,4 +188,11 @@ export default {
         width: 100%;
     }
 }
+
+@keyframes color_anim {
+    100% {
+        color: #fff;
+    }
+}
+
 </style>
