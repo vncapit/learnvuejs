@@ -13,6 +13,7 @@
     <SignupForm/>
     <CalculatorVue/>
     <PasswordStrengthMeter/>
+    <EventsCard/>
   </div>
 </template>
 
@@ -30,6 +31,8 @@ import HotSpot from '@/components/HotSpot.vue';
 import SignupForm from '@/components/SignupForm.vue';
 import CalculatorVue from '@/components/CalculatorVue.vue';
 import PasswordStrengthMeter from '@/components/PasswordStrengthMeter.vue';
+import EventsCard from '@/components/EventsCard.vue';
+
 
 export default {
   name: 'App',
@@ -46,7 +49,8 @@ export default {
     HotSpot,
     SignupForm,
     CalculatorVue,
-    PasswordStrengthMeter
+    PasswordStrengthMeter,
+    EventsCard,
 }
 }
 </script>
