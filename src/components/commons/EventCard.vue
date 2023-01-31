@@ -1,6 +1,6 @@
 <template>
     <div class="container">
-        <div class="img">
+        <div class="img" :style="style_url">
             <div class="date">
                 <div class="month">
                     {{ month }}
@@ -25,10 +25,13 @@ export default {
     name: 'EventCard',
     computed: {
         month() {
-            return this.data.date.toLocaleString('en-US', { month: 'short' });
+            return this.data.startDate.toLocaleString('en-US', { month: 'short' });
         },
         day() {
-            return this.data.date.getDate();
+            return this.data.startDate.getDate();
+        },
+        style_url() {
+            return `background-image: url('${this.data.img}');`
         }
     },
     props: {
@@ -38,9 +41,10 @@ export default {
                 return {
                     title: 'Scuba Merit Badge',
                     time: 'August 28 | 8am - 3pm',
-                    date: new Date('2023-12-14'),
+                    startDate: new Date('2023-12-14'),
                     desc: 'Earn your scuba diving merit badge. Pre-req: Requirement 1a, 2b, 4ab',
                     location: '503 Harbor Blvd, Destin, FL',
+                    img: 'image/eventcard1.avif',
                 }
             }
         },
@@ -71,10 +75,8 @@ export default {
     .img {
         height: 200px;
         width: 240px;
-        background-image: url('@/assets/image/eventcard1.avif');
         background-size: cover;
         position: relative;
-
 
         .date {
             position: absolute;
