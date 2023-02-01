@@ -1,5 +1,5 @@
 <template>
-    <div class="container">
+    <div class="container_">
         <div class="img" :style="style_url">
             <div class="date">
                 <div class="month">
@@ -61,7 +61,7 @@ export default {
     box-sizing: border-box;
 }
 
-.container {
+.container_ {
     display: flex;
     flex-direction: row;
     width: 630px;
@@ -71,7 +71,7 @@ export default {
     font-family: 'Roboto', sans-serif;
     font-weight: 300;
     box-shadow: rgba(9, 30, 66, 0.25) 0px 4px 8px -2px, rgba(9, 30, 66, 0.08) 0px 0px 0px 1px;
-
+    margin: 50px auto;
     .img {
         height: 200px;
         width: 240px;

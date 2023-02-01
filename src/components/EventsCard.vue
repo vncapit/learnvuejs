@@ -1,19 +1,30 @@
 <template>
     <div class="container">
-        <input type="text" class="search_bar" placeholder="Search">
+        <input type="text" class="search_bar" placeholder="Search" v-model="search">
         <div class="menu">
             <ul>
-                <li @click="menuClickHandle('important')">Important</li>
-                <li @click="menuClickHandle('upcoming')">Upcoming</li>
-                <li @click="menuClickHandle('finished')">Finished</li>
+                <li :class="{ 'selected': (this.menu == 'important') }" @click="menuClickHandle('important')">Important
+                </li>
+                <li :class="{ 'selected': (this.menu == 'upcoming') }" @click="menuClickHandle('upcoming')">Upcoming
+                </li>
+                <li :class="{ 'selected': (this.menu == 'finished') }" @click="menuClickHandle('finished')">Finished
+                </li>
+                <div class="underline" :style="eventscard.style"></div>
             </ul>
             <span>FILTER <i class="fa-solid fa-bars"></i></span>
+        </div>
+        <div class="cards">
+            <TransitionGroup name="fade" tag="ul">
+                <li v-for="card in eventscard.cards" :key="card.title">
+                    <EventCard :data="card" />
+                </li>
+            </TransitionGroup>
         </div>
     </div>
 </template>
 
 <script>
-// import EventCard from '@/components/commons/EventCard.vue';
+import EventCard from '@/components/commons/EventCard.vue';
 
 class Event {
     constructor(title, isImportant, time, startDate, desc, location, img) {
@@ -31,28 +42,41 @@ class Event {
 export default {
     name: 'EventsCard',
     components: {
-        // EventCard,
+        EventCard,
     },
     data() {
         return {
             events: [],
             menu: 'important',
+            search: '',
         }
     },
     computed: {
         eventscard() {
+            let events = { cards: [], style: '' }
+            let cards = [];
             const compareDate = new Date('2023-01-01');
             switch (this.menu) {
                 case 'important':
-                    return this.events.filter((event) => {return event.isImportant});
+                    cards = this.events.filter((event) => { return event.isImportant });
+                    events.style = 'left: 9px; width: 69px;';
+                    break;
                 case 'upcoming':
-                    return this.events.filter((event) => {return event.startDate > compareDate });
+                    cards = this.events.filter((event) => { return event.startDate > compareDate });
+                    events.style = 'left: 93px; width: 70px;';
+                    break;
                 case 'finished':
-                return this.events.filter((event) => {return event.startDate < compareDate });
+                    cards = this.events.filter((event) => { return event.startDate < compareDate });
+                    events.style = 'left: 180px; width: 60px;';
+                    break;
+
                 default:
                     return this.events;
             }
-        }
+
+            events.cards = cards.filter((card) => { return card.title.toLowerCase().includes(this.search.toLowerCase())});
+            return events;
+        },
     },
     methods: {
         menuClickHandle(menu) {
@@ -78,7 +102,9 @@ export default {
             this.events.push(new Event('Sailing', false, 'April 23 | 11am - 7pm',
                 new Date('2022-04-23'), 'Sail the high seas. Get lost in the Bermuda Triangle.',
                 'Second star to the right, and straight on till morning', 'image/eventcard5.avif'));
-        }
+        },
+
+
     },
     mounted() {
         this.init();
@@ -93,13 +119,34 @@ export default {
     box-sizing: border-box;
 }
 
+.fade-enter-active,
+.fade-leave-active {
+    transition: all 0.6s linear;
+}
+
+.fade-enter,
+.fade-leave-active {
+    position: absolute;
+    opacity: 0;
+    transform: translateY(-50px);
+}
+
+
+.fade-enter-active {
+    position: relative;
+    top: 0;
+    left: 0;
+}
+
 .container {
     width: 100%;
-    min-height: 600px;
+    min-height: 900px;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
+
+    background: radial-gradient(900px, rgb(159, 230, 118), rgb(227, 124, 236));
 
     .search_bar {
         display: block;
@@ -125,7 +172,7 @@ export default {
         padding: 15px;
 
         ul {
-            list-style: none;
+            position: relative;
             display: inline-block;
 
             li {
@@ -133,7 +180,21 @@ export default {
                 padding: 0px 8px;
                 cursor: pointer;
             }
+
+            .selected {
+                color: rgb(235, 81, 81);
+            }
+
+            .underline {
+                position: absolute;
+                top: 130%;
+                height: 2px;
+                background-color: rgb(235, 81, 81);
+                transition: all 0.3s ease;
+            }
         }
+
+
 
         span {
             cursor: pointer;
@@ -142,6 +203,14 @@ export default {
                 padding-left: 5px;
             }
         }
+    }
+
+    ul {
+        list-style: none;
+    }
+
+    .cards {
+        min-width: 630px;
     }
 }
 </style>
