@@ -14,6 +14,7 @@
     <CalculatorVue/>
     <PasswordStrengthMeter/>
     <EventsCard/>
+    <VueGallery/>
   </div>
 </template>
 
@@ -32,7 +33,7 @@ import SignupForm from '@/components/SignupForm.vue';
 import CalculatorVue from '@/components/CalculatorVue.vue';
 import PasswordStrengthMeter from '@/components/PasswordStrengthMeter.vue';
 import EventsCard from '@/components/EventsCard.vue';
-
+import VueGallery from '@/components/VueGallery.vue';
 
 export default {
   name: 'App',
@@ -51,6 +52,7 @@ export default {
     CalculatorVue,
     PasswordStrengthMeter,
     EventsCard,
+    VueGallery,
 }
 }
 </script>

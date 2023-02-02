@@ -21,12 +21,6 @@
         <div class="add-new">
             <input type="text" name="" ref="todoText">
             <button value="Add" @click="addHandle">Add</button>
-            <!-- <label class="switch">
-                <input type="checkbox"  v-model="tongleStatus">
-                <span class="slider round"></span>
-            </label> -->
-
-            <!-- <SwitchButton :isCheck="isChecked" @input="isChecked=$event"/> -->
             <SwitchButton class="switch-button" v-model="isChecked" />
         </div>
     </div>
