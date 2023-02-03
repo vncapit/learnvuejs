@@ -15,6 +15,7 @@
     <PasswordStrengthMeter/>
     <EventsCard/>
     <VueGallery/>
+    <PreLoader/>
   </div>
 </template>
 
@@ -34,6 +35,7 @@ import CalculatorVue from '@/components/CalculatorVue.vue';
 import PasswordStrengthMeter from '@/components/PasswordStrengthMeter.vue';
 import EventsCard from '@/components/EventsCard.vue';
 import VueGallery from '@/components/VueGallery.vue';
+import PreLoader from '@/components/PreLoader.vue';
 
 export default {
   name: 'App',
@@ -53,6 +55,7 @@ export default {
     PasswordStrengthMeter,
     EventsCard,
     VueGallery,
+    PreLoader
 }
 }
 </script>
