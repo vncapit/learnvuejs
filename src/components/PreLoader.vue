@@ -1,11 +1,11 @@
 <template>
     <div class="container">
-        <div class="preloader" :class="{ 'loader-done-1': done }">
-            <div v-if="percent != 101" class="percent">I'm {{ percent }} % done!</div>
-            <div v-if="percent == 101">Let get crazy!</div>
-            <div v-if="percent != 101" class="progress-bar" :style="`left: ${percent - 100}%;`"></div>
+        <div class="preloader" :class="{ 'loader-done-1': next }">
+            <div v-if="!done" class="percent">I'm {{ percent }} % done!</div>
+            <div v-if="done">Let get crazy!</div>
+            <div v-if="!done" class="progress-bar" :style="`left: ${percent - 100}%;`"></div>
         </div>
-        <div class="main" :class="{ 'loader-done-2': done }">
+        <div class="main" :class="{ 'loader-done-2': next }">
             <p>Nice to meet you, i'm a title!</p>
         </div>
     </div>
@@ -19,6 +19,7 @@ export default {
             percent: 0,
             timer: null,
             done: false,
+            next: false,
         }
     },
     mounted() {
@@ -28,10 +29,13 @@ export default {
         counter() {
             this.timer = setInterval(() => {
                 this.percent++;
-                if (this.percent == 101) {
+                if (this.percent == 100) {
                     clearInterval(this.timer);
                     setTimeout(() => {
                         this.done = true;
+                        setTimeout(() => {
+                            this.next = true;
+                        }, 1500);
                     }, 1500);
                 }
             }, 40)
@@ -107,7 +111,10 @@ export default {
         position: absolute;
         top: 100%;
         transition: all 2s linear;
-        padding-top: 20px;
+
+        p {
+            margin-top: 60px;
+        }
 
     }
 }
