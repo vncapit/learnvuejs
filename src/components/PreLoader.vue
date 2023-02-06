@@ -58,7 +58,6 @@ export default {
     align-items: flex-start;
     width: 100vw;
     height: 100vh;
-    background: linear-gradient(60deg, rgb(236, 213, 118), rgb(210, 241, 84));
     overflow: hidden;
     position: relative;
 

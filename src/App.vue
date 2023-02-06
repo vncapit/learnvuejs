@@ -1,52 +1,17 @@
 <template>
   <div id="app">
-    <nav>
-      <ul>
-        <li>
-          <router-link to="/">Todo</router-link>
-        </li>
-        <li>
-          <router-link to="/gallery">Gallery</router-link>
-        </li>
-        <li>
-          <router-link></router-link>
-        </li>
-        <li>
-          <router-link></router-link>
-        </li>
-        <li>
-          <router-link></router-link>
-        </li>
-        <li>
-          <router-link></router-link>
-        </li>
-        <li>
-          <router-link></router-link>
-        </li>
-        <li>
-          <router-link></router-link>
-        </li>
-        <li>
-          <router-link></router-link>
-        </li>
-        <li>
-          <router-link></router-link>
-        </li>
-      </ul>
-
-
-    </nav>
+    <ElMenu/>
     <router-view/>
   </div>
 </template>
 
 <script>
-
+import ElMenu from '@/components/Menu/Menu.vue';
 
 export default {
   name: 'App',
   components: {
-
+    ElMenu
 }
 }
 </script>
@@ -57,7 +22,6 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+  margin-top: 0px;
 }
 </style>

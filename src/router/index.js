@@ -16,25 +16,27 @@ import ToDo from '../components/ToDo.vue';
 import VueGallery from '../components/VueGallery.vue';
 import WeatherApi from '../components/WeatherApi.vue';
 
-export const routes = [
-    { path: '/calculator', component: CalculatorVue},
-    { path: '/contact-form', component: ContactForm},
-    { path: '/digital-clock', component: DigitalClock},
-    { path: '/events-card', component: EventsCard},
-    { path: '/flip-clock', component: FlipClock},
-    { path: '/hot-spot', component: HotSpot},
-    { path: '/modal-image', component: ModalImage},
-    { path: '/password-strength-master', component: PasswordStrengthMeter},
-    { path: '/pop-up-form', component: PopupForm},
-    { path: '/pre-loader', component: PreLoader},
-    { path: '/search-filter', component: SearchFilter},
-    { path: '/side-bar', component: SideBar},
-    { path: '/sign-up-form', component: SignupForm},
-    { path: '/tab-menu', component: TabMenu},
-    { path: '/to-do', component: ToDo},
-    { path: '/vue-gallery', component: VueGallery},
-    { path: '/weather-api', component: WeatherApi},
+const routes = [
+    { path: '/calculator', component: CalculatorVue, name: 'Calculator'},
+    { path: '/contact-form', component: ContactForm, name: 'Contact Form'},
+    { path: '/digital-clock', component: DigitalClock, name: 'Digital Clock'},
+    { path: '/events-card', component: EventsCard, name: 'Events Card'},
+    { path: '/flip-clock', component: FlipClock, name: 'Flip Coundown'},
+    { path: '/hot-spot', component: HotSpot, name: 'Hotspot'},
+    { path: '/modal-image', component: ModalImage, name: 'Modal Image'},
+    { path: '/password-strength-master', component: PasswordStrengthMeter, name: 'Password Strength Meter'},
+    { path: '/pop-up-form', component: PopupForm, name: 'Popup Form'},
+    { path: '/pre-loader', component: PreLoader, name: 'Preloader'},
+    { path: '/search-filter', component: SearchFilter, name: 'Search Filter'},
+    { path: '/side-bar', component: SideBar, name: 'Side Bar'},
+    { path: '/sign-up-form', component: SignupForm, name: 'Signup Form'},
+    { path: '/tab-menu', component: TabMenu, name: 'Tab Menu'},
+    { path: '/to-do', component: ToDo, name: 'Todo List'},
+    { path: '/vue-gallery', component: VueGallery, name: 'Gallery'},
+    { path: '/weather-api', component: WeatherApi, name: 'WeatherAPI'},
 ];
+
+
 
 export default routes;
 
