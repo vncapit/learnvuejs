@@ -1,61 +1,52 @@
 <template>
   <div id="app">
-    <ToDo/>
-    <SideBar/>
-    <TabMenu/>
-    <WeatherApiVue/>
-    <PopupForm/>
-    <DigitalClock/>
-    <ContactForm/>
-    <FlipClock/>
-    <SearchFilter/>
-    <HotSpot/>
-    <SignupForm/>
-    <CalculatorVue/>
-    <PasswordStrengthMeter/>
-    <EventsCard/>
-    <VueGallery/>
-    <PreLoader/>
+    <nav>
+      <ul>
+        <li>
+          <router-link to="/">Todo</router-link>
+        </li>
+        <li>
+          <router-link to="/gallery">Gallery</router-link>
+        </li>
+        <li>
+          <router-link></router-link>
+        </li>
+        <li>
+          <router-link></router-link>
+        </li>
+        <li>
+          <router-link></router-link>
+        </li>
+        <li>
+          <router-link></router-link>
+        </li>
+        <li>
+          <router-link></router-link>
+        </li>
+        <li>
+          <router-link></router-link>
+        </li>
+        <li>
+          <router-link></router-link>
+        </li>
+        <li>
+          <router-link></router-link>
+        </li>
+      </ul>
+
+
+    </nav>
+    <router-view/>
   </div>
 </template>
 
 <script>
-import ToDo from './components/ToDo.vue'
-import SideBar from './components/SideBar.vue'
-import TabMenu from './components/TabMenu.vue'
-import WeatherApiVue from './components/WeatherApi.vue'
-import PopupForm from './components/PopupForm.vue'
-import DigitalClock from './components/DigitalClock.vue'
-import ContactForm from './components/ContactForm.vue'
-import FlipClock from './components/FlipClock.vue'
-import SearchFilter from './components/SearchFilter.vue'
-import HotSpot from '@/components/HotSpot.vue';
-import SignupForm from '@/components/SignupForm.vue';
-import CalculatorVue from '@/components/CalculatorVue.vue';
-import PasswordStrengthMeter from '@/components/PasswordStrengthMeter.vue';
-import EventsCard from '@/components/EventsCard.vue';
-import VueGallery from '@/components/VueGallery.vue';
-import PreLoader from '@/components/PreLoader.vue';
+
 
 export default {
   name: 'App',
   components: {
-    ToDo,
-    SideBar,
-    TabMenu,
-    WeatherApiVue,
-    PopupForm,
-    DigitalClock,
-    ContactForm,
-    FlipClock,
-    SearchFilter,
-    HotSpot,
-    SignupForm,
-    CalculatorVue,
-    PasswordStrengthMeter,
-    EventsCard,
-    VueGallery,
-    PreLoader
+
 }
 }
 </script>
