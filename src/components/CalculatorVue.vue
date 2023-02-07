@@ -134,7 +134,7 @@ export default {
 .container {
     background: linear-gradient(45deg, rgb(119, 237, 241), rgb(113, 216, 110));
     width: 100%;
-    height: 800px;
+    height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;

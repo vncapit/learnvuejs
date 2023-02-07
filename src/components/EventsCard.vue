@@ -140,7 +140,7 @@ export default {
 
 .container {
     width: 100%;
-    min-height: 900px;
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;

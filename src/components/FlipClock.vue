@@ -83,7 +83,7 @@ export default {
 
 .container {
     width: 100%;
-    height: 150px;
+    height: 100vh;
     display: flex;
     flex-direction: row;
     align-items: center;

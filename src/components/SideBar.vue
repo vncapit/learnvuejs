@@ -75,7 +75,7 @@ export default {
 }
 .menu {
     background-color: #34495e;
-    height: 600px;
+    height: 100vh;
     width: 250px;
     position: absolute;
     transition: transform .3s ease-in-out;
@@ -120,7 +120,7 @@ export default {
 }
 .content {
     background-color: #2c3e50;
-    height: 600px;
+    height: 100vh;
     width: 100%;
     
 }

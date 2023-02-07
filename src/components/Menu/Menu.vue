@@ -31,12 +31,12 @@ export default {
     justify-content: center;
     justify-items: center;
     list-style: none;
-
+    font-family:'Times New Roman', Times, serif;
+    background: rgb(46, 44, 44);
+    flex-wrap: wrap;
     li {
         display: inline-block;
-
         background: rgb(46, 44, 44);
-        
         a {
             display: inline-block;
             padding: 10px 10px;

@@ -87,7 +87,7 @@ export default {
     justify-content: center;
     align-items: center;
     width: 100%;
-    height: 400px;
+    height: 100vh;
     background: linear-gradient(26deg, rgb(168, 61, 133), rgb(214, 247, 71));
 
     .password_ok {

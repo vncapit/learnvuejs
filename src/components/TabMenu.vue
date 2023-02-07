@@ -33,21 +33,21 @@ export default {
                 {
                     id: 0,
                     name: 'First Tab',
-                    imageUrl: 'image/bg1.avif',
+                    imageUrl: 'image/tab-menu/bg1.avif',
                     header: 'First Header',
                     paragraph: 'Trong khi đó, Bộ Công Thương khẳng định đang theo dõi sát để xử lý tình hình. "Dự kiến nhà máy này vận hành trở lại vào giữa tháng 1 và sẽ tăng sản xuất để bù sản lượng thiếu hụt từ nay tới Tết Nguyên đán", đại diện Bộ thông tin.',
                 },
                 {
                     id: 1,
                     name: 'Second Tab',
-                    imageUrl: 'image/bg2.avif',
+                    imageUrl: 'image/tab-menu/bg2.avif',
                     header: 'Second Header',
                     paragraph: 'Đại diện NSRP xác nhận và cho biết "nhà máy đã và đang trong quá trình sửa chữa để phân xưởng RFCC vận hành trở lại trong thời gian sớm nhất".',
                 },
                 {
                     id: 2,
                     name: 'Third Tab',
-                    imageUrl: 'image/bg3.avif',
+                    imageUrl: 'image/tab-menu/bg3.avif',
                     header: 'Third Header',
                     paragraph: 'Tình hình sản xuất của Nghi Sơn ổn định trong giai đoạn nửa cuối năm 2022, với 100% công suất. Sản lượng xăng dầu cung ứng bình quân mỗi tháng nhà máy này khoảng 600.000 m3.',
                 }
@@ -101,7 +101,7 @@ export default {
     align-items: center;
     background: linear-gradient(to bottom, #2193b0, #6dd5ed);
     width: auto;
-    height: 600px;
+    height: 100vh;
 }
 
 .menu {

@@ -59,8 +59,8 @@ export default {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: auto;
-    height: 300px;
+    width: 100%;
+    height: 100vh;
     background: radial-gradient(ellipse at center,  #0a2e38  0%, #000000 70%);
 }
 

@@ -9,7 +9,7 @@
             </p>
         </div>
         <div class="select">
-            <span class="arrow" :class="collapsed ? 'arrow-down' : 'arrow-right'" @click="menuClickHandle" ></span>
+            <span class="arrow" :class="collapsed ? 'arrow-down' : 'arrow-right'" @click="menuClickHandle"></span>
             <select v-model="weathers" multiple="true" class="city-list" :size="showSize">
                 <option v-for="city in cities" v-bind:key="city">
                     {{ city }}
@@ -50,7 +50,9 @@ export default {
         }
     },
     mounted() {
-
+        setTimeout(() => {
+            this.weathers = [...this.cities]
+        }, 200);
     },
     computed: {
         showSize() {
@@ -87,7 +89,7 @@ export default {
             let index = this.weathers.indexOf(city)
             this.weatherInfos[index].info = data
         },
-        menuClickHandle(){
+        menuClickHandle() {
             this.collapsed = !this.collapsed
         }
     },
@@ -100,11 +102,14 @@ export default {
     padding: 0;
     color: #fff;
 }
+
 .header {
     padding: 20px;
+
     .app-name {
         padding: 5px;
         padding-bottom: 10px;
+        font-size: 40px;
     }
 }
 
@@ -114,7 +119,7 @@ export default {
     justify-items: center;
     background-color: rgb(92, 64, 132);
     color: #fff;
-    min-height: 300px;
+    height: 100vh;
     position: relative;
     flex: 1;
 }
@@ -130,11 +135,13 @@ export default {
         right: calc(50% + 150px/2);
         margin-right: 6px;
     }
+
     .arrow-right {
         border-top: 13px solid transparent;
         border-bottom: 13px solid transparent;
         border-left: 20px solid rgb(3, 63, 63);
     }
+
     .arrow-down {
         border-top: 20px solid rgb(3, 63, 63);
         border-right: 13px solid transparent;

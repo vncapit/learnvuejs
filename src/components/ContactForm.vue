@@ -149,8 +149,8 @@ ul {
     justify-content: space-around;
     align-items: center;
     background: linear-gradient(to bottom right, #56D8E4 0%, #9F01EA 100%);
-    width: auto;
-    height: 1050px;
+    width: 100%;
+    height: 100vh;
 }
 
 .form {

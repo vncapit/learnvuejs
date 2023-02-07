@@ -94,7 +94,7 @@ export default {
 .container {
     background-image: linear-gradient(-128deg, rgba(255, 181, 32, 0.93) 3%, rgba(239, 39, 153, 0.93) 88%, rgba(237, 18, 171, 0.93) 100%);
     width: 100%;
-    height: 600px;
+    height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: center;

@@ -1,29 +1,33 @@
 <template>
-    <div class="todo-list">
-        <h1>
-            Todo List
-            <span>Get things done, one item at a time</span>
-        </h1>
-        <transition-group name="flip-list" tag="ul">
-            <template v-if="todoOrdered.length > 0">
-                <li v-for="item in todoOrdered" :key="item.id">
-                    <div class="item">
-                        <span v-bind:class="{ 'item-done': item.isDone }">{{ item.name }}</span>
-                        <div class="action">
-                            <input class="checkbox" type="checkbox" :checked="item.isDone" @change="changeHandle(item)">
-                            <i class="fa fa-trash" @click="deleteHandle(item)"></i>
+    <div class="container">
+        <div class="todo-list">
+            <h1>
+                Todo List
+                <span>Get things done, one item at a time</span>
+            </h1>
+            <transition-group name="flip-list" tag="ul">
+                <template v-if="todoOrdered.length > 0">
+                    <li v-for="item in todoOrdered" :key="item.id">
+                        <div class="item">
+                            <span v-bind:class="{ 'item-done': item.isDone }">{{ item.name }}</span>
+                            <div class="action">
+                                <input class="checkbox" type="checkbox" :checked="item.isDone"
+                                    @change="changeHandle(item)">
+                                <i class="fa fa-trash" @click="deleteHandle(item)"></i>
+                            </div>
                         </div>
-                    </div>
-                </li>
-            </template>
-        </transition-group>
+                    </li>
+                </template>
+            </transition-group>
 
-        <div class="add-new">
-            <input type="text" name="" ref="todoText">
-            <button value="Add" @click="addHandle">Add</button>
-            <SwitchButton class="switch-button" v-model="isChecked" />
+            <div class="add-new">
+                <input type="text" name="" ref="todoText">
+                <button value="Add" @click="addHandle">Add</button>
+                <SwitchButton class="switch-button" v-model="isChecked" />
+            </div>
         </div>
     </div>
+
 
 </template>
 
@@ -123,169 +127,160 @@ export default {
     margin: 0px;
 }
 
-
-.flip-list-move {
-    transition: transform 1.5s;
-}
-
-.add-new {
+.container {
     display: flex;
     align-items: center;
     justify-content: center;
+    width: 100vw;
+    height: 100vh;
+    background: linear-gradient(60deg, rgb(231, 164, 164), rgb(202, 233, 152));
 
-    input {
-        height: 30px;
-        width: 300px;
+    .flip-list-move {
+        transition: transform 1.5s;
     }
 
-    button {
-        margin-left: 10px;
-        width: 60px;
-        height: 34px;
-    }
-}
+    .add-new {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-top: 20px;
+        width: 100%;
 
-.todo-list {
-    box-shadow: -20px -20px 0px 0px rgba(100, 100, 100, .1);
-    color: white;
-    background-color: rgba($color: #ff0000, $alpha: 0.6);
-    font-family: 'Quicksand', sans-serif;
-    font-size: 18px;
-    width: 500px;
-    margin: 10px auto;
-    padding: 20px 30px;
+        input {
+            height: 30px;
+            width: 350px;
 
-    h1 {
-        font-size: 40px;
-        text-align: left;
-        padding: 20px;
+            &:focus {
+                outline: none;
+            }
+        }
 
-        span {
-            font-size: 16px;
-            display: block;
-            padding-top: 10px;
-            padding-bottom: 10px;
-            border-bottom: solid 1px;
+        button {
+            margin-left: 10px;
+            width: 80px;
+            height: 34px;
+            background-color: rgba($color: #e9e2e2, $alpha: 0.7);
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+
+            &:hover {
+                background-color: rgba($color: #beb7b7, $alpha: 0.9);
+            }
         }
     }
-}
 
-li {
-    list-style: none;
-}
+    .todo-list {
+        box-shadow: -20px -20px 0px 0px rgba(100, 100, 100, .1);
+        color: white;
+        background-color: rgba($color: #c01414fa, $alpha: 0.6);
+        font-family: 'Quicksand', sans-serif;
+        font-size: 18px;
+        width: 500px;
+        margin: 10px auto;
+        padding: 20px 30px;
 
-.checkbox {
-    display: inline-block;
-    transform: scale(1.3);
-    margin-right: 15px;
-}
+        h1 {
+            font-size: 40px;
+            text-align: left;
+            padding: 20px;
+
+            span {
+                font-size: 16px;
+                display: block;
+                padding-top: 10px;
+                padding-bottom: 10px;
+                border-bottom: solid 1px;
+            }
+        }
+    }
+
+    li {
+        list-style: none;
+    }
+
+    .checkbox {
+        display: inline-block;
+        transform: scale(1.3);
+        margin-right: 15px;
+    }
 
 
-.item {
-    display: flex;
-    justify-content: space-between;
-    border: none;
-    padding: 10px 10px;
-    align-items: center;
-    margin: 2px auto;
-    background: rgba(255, 255, 255, 0.1);
+    .item {
+        display: flex;
+        justify-content: space-between;
+        border: none;
+        padding: 10px 10px;
+        align-items: center;
+        margin: 2px auto;
+        background: rgba(255, 255, 255, 0.1);
 
-}
+    }
 
-.action {
-    display: inline-block;
-}
+    .action {
+        display: inline-block;
+    }
 
-.item-done {
-    opacity: 0.6;
-    position: relative;
+    .item-done {
+        opacity: 0.6;
+        position: relative;
 
-    &::before {
-        content: '';
+        &::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: -.5rem;
+            display: block;
+            width: 0%;
+            height: 1px;
+            border-bottom: solid 1px #fff;
+            animation: donedone 0.3s ease-out 0s forwards;
+        }
+    }
+
+    @keyframes donedone {
+        to {
+            width: calc(100% + 1rem);
+        }
+    }
+
+    .switch-button {
+        margin-left: 10px;
+    }
+
+    .slider:before {
         position: absolute;
-        top: 50%;
-        left: -.5rem;
-        display: block;
-        width: 0%;
-        height: 1px;
-        border-bottom: solid 1px #fff;
-        animation: donedone 0.3s ease-out 0s forwards;
+        content: "";
+        height: 26px;
+        width: 26px;
+        left: 4px;
+        bottom: 4px;
+        background-color: white;
+        -webkit-transition: .4s;
+        transition: .4s;
     }
-}
 
-@keyframes donedone {
-    to {
-        width: calc(100% + 1rem);
+    input:checked+.slider {
+        background-color: #2196F3;
     }
-}
 
-.switch-button {
-    margin-left: 10px;
-}
+    input:focus+.slider {
+        box-shadow: 0 0 1px #2196F3;
+    }
 
+    input:checked+.slider:before {
+        -webkit-transform: translateX(26px);
+        -ms-transform: translateX(26px);
+        transform: translateX(26px);
+    }
 
-/* The switch - the box around the slider */
-.switch {
-    position: relative;
-    display: inline-block;
-    width: 60px;
-    height: 34px;
-    margin: 30px 20px;
+    /* Rounded sliders */
+    .slider.round {
+        border-radius: 34px;
+    }
 
-}
-
-/* Hide default HTML checkbox */
-.switch input {
-    opacity: 0;
-    width: 0;
-    height: 0;
-}
-
-/* The slider */
-.slider {
-    position: absolute;
-    cursor: pointer;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: #ccc;
-    -webkit-transition: .4s;
-    transition: .4s;
-}
-
-.slider:before {
-    position: absolute;
-    content: "";
-    height: 26px;
-    width: 26px;
-    left: 4px;
-    bottom: 4px;
-    background-color: white;
-    -webkit-transition: .4s;
-    transition: .4s;
-}
-
-input:checked+.slider {
-    background-color: #2196F3;
-}
-
-input:focus+.slider {
-    box-shadow: 0 0 1px #2196F3;
-}
-
-input:checked+.slider:before {
-    -webkit-transform: translateX(26px);
-    -ms-transform: translateX(26px);
-    transform: translateX(26px);
-}
-
-/* Rounded sliders */
-.slider.round {
-    border-radius: 34px;
-}
-
-.slider.round:before {
-    border-radius: 50%;
+    .slider.round:before {
+        border-radius: 50%;
+    }
 }
 </style>
