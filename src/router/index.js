@@ -15,6 +15,7 @@ import TabMenu from '../components/TabMenu.vue';
 import ToDo from '../components/ToDo.vue';
 import VueGallery from '../components/VueGallery.vue';
 import WeatherApi from '../components/WeatherApi.vue';
+import MenuVue from '../components/MenuVue.vue';
 
 const routes = [
     { path: '/calculator', component: CalculatorVue, name: 'Calculator'},
@@ -34,6 +35,8 @@ const routes = [
     { path: '/to-do', component: ToDo, name: 'Todo List'},
     { path: '/vue-gallery', component: VueGallery, name: 'Gallery'},
     { path: '/weather-api', component: WeatherApi, name: 'WeatherAPI'},
+    { path: '/', component: MenuVue, name: 'Menu'},
+    
 ];
 
 

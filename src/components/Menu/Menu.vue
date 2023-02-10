@@ -1,7 +1,7 @@
 <template>
     <ul class="menu">
         <li v-for="route in routes" :key="route.path">
-            <router-link :to="route.path">{{ route.name }}</router-link>
+            <router-link :to="route.path">{{ route.name }}</router-link> 
         </li>
     </ul>
 </template>
@@ -15,6 +15,7 @@ export default {
             routes: routes
         }
     },
+
 }
 </script>
 
@@ -31,24 +32,27 @@ export default {
     justify-content: center;
     justify-items: center;
     list-style: none;
-    font-family:'Times New Roman', Times, serif;
+    font-family: 'Times New Roman', Times, serif;
     background: rgb(46, 44, 44);
     flex-wrap: wrap;
+
     li {
         display: inline-block;
         background: rgb(46, 44, 44);
+
         a {
             display: inline-block;
             padding: 10px 10px;
             text-decoration: none;
             color: rgb(200, 200, 200);
 
-            &:active, &:visited {
+            &:active,
+            &:visited {
                 color: rgb(200, 200, 200);
             }
         }
 
-        &:hover{
+        &:hover {
             background: rgb(100, 100, 100);
         }
     }
